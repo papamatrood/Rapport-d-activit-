@@ -1,0 +1,21 @@
+{{ form_start(form, {'attr' : {'class': 'add-rapport'} }) }}
+<table class="table">
+    <tbody>
+        <tr>
+            <td>
+                <input class="form-control form-control-sm" value="{{ " now"|date("d-m-Y") }}" tabindex="-1"
+                    disabled="disabled">
+            </td>
+            <td>{{ form_row(form.installation, {'attr' : {'class': 'form-control form-control-sm'} }) }}</td>
+            <td>{{ form_row(form.interqualite, {'attr' : {'class': 'form-control form-control-sm'} }) }}</td>
+            <td>{{ form_row(form.interdepannage, {'attr' : {'class': 'form-control form-control-sm'} }) }}</td>
+            <td>{{ form_row(form.visite, {'attr' : {'class': 'form-control form-control-sm'} }) }}</td>
+            <td>{{ form_row(form.recuperation, {'attr' : {'class': 'form-control form-control-sm'} }) }}</td>
+            <td>{{ form_row(form.autre, {'attr' : {'class': 'form-control form-control-sm'} }) }}</td>
+            <td>
+                <button class="btn btn-sm btn-primary">{{ button_label|default('Ajouter') }}</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{{ form_end(form) }}

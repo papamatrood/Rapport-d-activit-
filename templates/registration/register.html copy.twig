@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enregistrer un utilisateur{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-6">
+        {{ form_start(registrationForm) }}
+        <fieldset class="border p-2">
+            <legend>Enregistrer un utilisateur</legend>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-md-3 col-form-label">Prénom</label>
+                <div class="col-md-9">
+                    {{ form_row(registrationForm.firstname) }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-md-3 col-form-label">Nom</label>
+                <div class="col-md-9">
+                    {{ form_row(registrationForm.lastname) }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-md-3 col-form-label">Email</label>
+                <div class="col-md-9">
+                    {{ form_row(registrationForm.email) }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-md-3 col-form-label">Mot de passe</label>
+                <div class="col-md-9">
+                    {{ form_row(registrationForm.password.first) }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword4" class="col-md-3 col-form-label">Confirmation de mot de passe</label>
+                <div class="col-md-9">
+                    {{ form_row(registrationForm.password.second) }}
+                </div>
+            </div>
+            <button type="submit" class="w-100 btn btn-primary">Enregistrer</button>
+        </fieldset>
+        {{ form_end(registrationForm) }}
+    </div>
+    <div class="col-md-6"></div>
+</div>
+
+
+{% endblock %}

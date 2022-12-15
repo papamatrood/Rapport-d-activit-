@@ -3,7 +3,6 @@
 {% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
-
 <div class="table-responsive p-3">
     <fieldset class="border p-2">
         <legend>Liste des utilisateurs</legend>
@@ -23,7 +22,7 @@
                     <td>{{ user.firstname }}</td>
                     <td>{{ user.lastname }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ attribute(roles, user.role) }}</td>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                     <td>
                         <div class="btn-group" role="group">
                             <a class="btn btn-sm btn-primary d-inline"
@@ -45,19 +44,18 @@
         </table>
     </fieldset>
 
-    {{ form_start(registrationForm, {'action': path('app_register'), 'attr' : {'class': 'add-rapport mt-5', } }) }}
+    {{ form_start(registrationForm, {'action': 'app_user_index', 'attr' : {'class': 'add-rapport mt-5', } }) }}
     <fieldset class="border p-2">
         <legend>Ajouter un utilisateur</legend>
-        <table class="table table-sm table-bordered table-striped text-center">
+        <table class="table table-sm table-bordered table-striped">
             <tbody>
                 <tr>
-                    <td width="12%">{{ form_row(registrationForm.firstname) }}</td>
-                    <td width="12%">{{ form_row(registrationForm.lastname) }}</td>
+                    <td width="16%">{{ form_row(registrationForm.firstname) }}</td>
+                    <td width="16%">{{ form_row(registrationForm.lastname) }}</td>
                     <td width="13%">{{ form_row(registrationForm.email) }}</td>
                     <td width="10%">{{ form_row(registrationForm.password.first) }}</td>
                     <td width="15%">{{ form_row(registrationForm.password.second) }}</td>
-                    <td width="10%">{{ form_row(registrationForm.role) }}</td>
-                    <td width="8%" class="align-bottom">
+                    <td width="10%">
                         <div class="d-grid gap-2">
                             <button class="btn btn-sm btn-success">{{ button_label|default('Ajouter') }}</button>
                         </div>

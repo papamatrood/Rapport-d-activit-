@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Rapport;
 use App\Form\RapportType;
 use App\Repository\RapportRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 // #[Route('/rapport')]
+#[IsGranted('ROLE_USER')]
 class RapportController extends AbstractController
 {
     #[Route('/', name: 'app_rapport_index', methods: ['GET', 'POST'])]

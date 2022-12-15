@@ -3,76 +3,80 @@
 {% block title %}Les rapports d'activités{% endblock %}
 
 {% block body %}
-<h3 class="mb-3">Les rapports d'activités</h3>
-<hr>
-<div class="table-responsive">
-    <table class="table table-sm table-bordered table-striped text-center mb-0">
-        <thead>
-            <tr>
-                <th width="13%">Date de création</th>
-                <th width="10%">Installations</th>
-                <th width="10%">Inter-Qualités</th>
-                <th width="12%">Inter-Dépannages</th>
-                <th width="10%">Visites</th>
-                <th width="10%">Récuperations</th>
-                <th width="18%">Autres</th>
-                <th width="15%">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for rapport in rapports %}
-            <tr>
-                <td>{{ rapport.createdAt ? rapport.createdAt|date('Y-m-d') : '' }}</td>
-                <td>{{ rapport.installation }}</td>
-                <td>{{ rapport.interqualite }}</td>
-                <td>{{ rapport.interdepannage }}</td>
-                <td>{{ rapport.visite }}</td>
-                <td>{{ rapport.recuperation }}</td>
-                <td>{{ rapport.autre }}</td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <a class="btn btn-sm btn-primary d-inline"
-                            href="{{ path('app_rapport_edit', {'id': rapport.id}) }}">Modifier</a>
-                        <form method="post" action="{{ path('app_rapport_delete', {'id': rapport.id}) }}"
-                            onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rapport.id) }}">
-                            <button class="btn btn-sm btn-danger d-inline">Supprimer</button>
-                        </form>
-                    </div>
+<div class="table-responsive p-3">
+    <fieldset class="border p-2">
+        <legend>Les rapports d'activités</legend>
+        <table class="table table-sm table-bordered table-striped text-center mb-0">
+            <thead>
+                <tr>
+                    <th width="13%">Date de création</th>
+                    <th width="10%">Installations</th>
+                    <th width="10%">Inter-Qualités</th>
+                    <th width="12%">Inter-Dépannages</th>
+                    <th width="10%">Visites</th>
+                    <th width="10%">Récuperations</th>
+                    <th width="18%">Autres</th>
+                    <th width="15%">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rapport in rapports %}
+                <tr>
+                    <td>{{ rapport.createdAt ? rapport.createdAt|date('Y-m-d') : '' }}</td>
+                    <td>{{ rapport.installation }}</td>
+                    <td>{{ rapport.interqualite }}</td>
+                    <td>{{ rapport.interdepannage }}</td>
+                    <td>{{ rapport.visite }}</td>
+                    <td>{{ rapport.recuperation }}</td>
+                    <td>{{ rapport.autre }}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a class="btn btn-sm btn-primary d-inline"
+                                href="{{ path('app_rapport_edit', {'id': rapport.id}) }}">Modifier</a>
+                            <form method="post" action="{{ path('app_rapport_delete', {'id': rapport.id}) }}"
+                                onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rapport.id) }}">
+                                <button class="btn btn-sm btn-danger d-inline">Supprimer</button>
+                            </form>
+                        </div>
 
 
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="8">Aucun enregistrement trouvé</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8">Aucun enregistrement trouvé</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </fieldset>
 
-    {{ form_start(form, {'attr' : {'class': 'add-rapport'} }) }}
-    <table class="table table-sm table-bordered table-striped text-center">
-        <tbody>
-            <tr>
-                <td width="13%">
-                    <input class="form-control form-control-sm" value="{{ " now"|date("d-m-Y") }}" tabindex="-1"
-                        disabled="disabled">
-                </td>
-                <td width="10%">{{ form_row(form.installation) }}</td>
-                <td width="10%">{{ form_row(form.interqualite) }}</td>
-                <td width="12%">{{ form_row(form.interdepannage) }}</td>
-                <td width="10%">{{ form_row(form.visite) }}</td>
-                <td width="10%">{{ form_row(form.recuperation) }}</td>
-                <td width="18%">{{ form_row(form.autre) }}</td>
-                <td width="15%">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-sm btn-success">{{ button_label|default('Ajouter') }}</button>
-                      </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    {{ form_start(form, {'attr' : {'class': 'add-rapport mt-5'} }) }}
+    <fieldset class="border p-2">
+        <legend>Ajouter un rapprot d'activité</legend>
+        <table class="table table-sm table-bordered table-striped text-center">
+            <tbody>
+                <tr>
+                    <td width="13%">
+                        <input class="form-control form-control-sm" value="{{ " now"|date("d-m-Y") }}" tabindex="-1"
+                            disabled="disabled">
+                    </td>
+                    <td width="10%">{{ form_row(form.installation) }}</td>
+                    <td width="10%">{{ form_row(form.interqualite) }}</td>
+                    <td width="12%">{{ form_row(form.interdepannage) }}</td>
+                    <td width="10%">{{ form_row(form.visite) }}</td>
+                    <td width="10%">{{ form_row(form.recuperation) }}</td>
+                    <td width="18%">{{ form_row(form.autre) }}</td>
+                    <td width="15%">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-sm btn-success">{{ button_label|default('Ajouter') }}</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
     {{ form_end(form) }}
 </div>
 

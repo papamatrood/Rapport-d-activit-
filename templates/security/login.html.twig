@@ -1,42 +1,70 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="fr">
 
-{% block title %}Log in!{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {{ encore_entry_link_tags('app') }}
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <title>Se connecter!</title>
+</head>
 
-{% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <form method="post" style="margin-top: 40%;" class="text-center">
+                    {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    {% if app.user %}
+                    <div class="mb-3">
+                        Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a
+                            href="{{ path('app_logout') }}">Se
+                            Déconnecter</a>
+                    </div>
+                    {% endif %}
+                    <img class="mb-4" src="/img/logo.png" alt="" width="192">
+                    <h3 class="mb-3 fw-normal text-secondary">Veuillez vous connecter</h3>
+
+                    <div class="form-floating">
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+                        autocomplete="email" required autofocus>
+                        <label for="inputEmail">Adresse email</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" name="password" id="inputPassword" class="form-control"
+                        autocomplete="current-password" required>
+                        <label for="inputPassword">Mot de passe</label>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    {#
+                    Uncomment this section and add a remember_me option below your firewall to activate remember me
+                    functionality.
+                    See https://symfony.com/doc/current/security/remember_me.html
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Remember me
+                        </label>
+                    </div>
+                    #}
+                    
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Se connecter</button>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
         </div>
-    {% endif %}
+    </div>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+</body>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
-{% endblock %}
+</html>

@@ -52,32 +52,7 @@
         </table>
     </fieldset>
 
-    {{ form_start(form, {'attr' : {'class': 'add-rapport mt-5'} }) }}
-    <fieldset class="border p-2">
-        <legend>Ajouter un rapprot d'activité</legend>
-        <table class="table table-sm table-bordered table-striped text-center">
-            <tbody>
-                <tr>
-                    <td width="13%">
-                        <input class="form-control form-control-sm" value="{{ " now"|date("d-m-Y") }}" tabindex="-1"
-                            disabled="disabled">
-                    </td>
-                    <td width="10%">{{ form_row(form.installation) }}</td>
-                    <td width="10%">{{ form_row(form.interqualite) }}</td>
-                    <td width="12%">{{ form_row(form.interdepannage) }}</td>
-                    <td width="10%">{{ form_row(form.visite) }}</td>
-                    <td width="10%">{{ form_row(form.recuperation) }}</td>
-                    <td width="18%">{{ form_row(form.autre) }}</td>
-                    <td width="15%">
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-sm btn-success">{{ button_label|default('Ajouter') }}</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </fieldset>
-    {{ form_end(form) }}
+    {{ include('rapport/_form.html.twig', {'titre': 'Ajouter un rapport d\'activité', 'button_label': 'Ajouter'}) }}
 </div>
 
 {% endblock %}

@@ -36,6 +36,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    private ?string $lastPassword = null;
+
     #[ORM\Column(length: 50)]
     private ?string $firstname = null;
 
@@ -111,6 +113,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    
+    public function getLastPassword(): string
+    {
+        return $this->lastPassword;
+    }
+
+    public function setLastPassword(string $lastPassword): self
+    {
+        $this->lastPassword = $lastPassword;
 
         return $this;
     }

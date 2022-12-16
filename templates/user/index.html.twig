@@ -27,6 +27,8 @@
                         <div class="btn-group" role="group">
                             <a class="btn btn-sm btn-primary d-inline"
                                 href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+                                <a class="btn btn-sm btn-info d-inline"
+                                    href="{{ path('app_user_edit_password', {'id': user.id}) }}">Modifier le mot de passe</a>
                             <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}"
                                 onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">

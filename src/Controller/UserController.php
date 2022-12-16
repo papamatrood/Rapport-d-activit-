@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\EditPasswordType;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -86,6 +87,36 @@ class UserController extends AbstractController
       
         return $this->render('user/edit.html.twig', [
             'user' => $user,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/password-edit', name: 'app_user_edit_password', methods: ['GET', 'POST'])]
+    public function passwordEdit(Request $request, User $user, UserPasswordHasherInterface $passwordHasher): Response
+    {
+        $form = $this->createForm(EditPasswordType::class, $user);
+        $form->handleRequest($request);
+
+        $lastPassword = $user->getPassword();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            dd($form->get('lastPassword')->getData(), $passwordHasher->isPasswordValid($user,$form->get('lastPassword')->getData()));
+
+            $encodedPassword = $passwordHasher->hashPassword(
+                $user,
+                $form->get('password')->getData()
+            );
+
+
+            $user->setPassword($encodedPassword);
+
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('[app_rapport_index]');
+        }
+      
+        return $this->render('user/edit_password.html.twig', [
             'form' => $form,
         ]);
     }

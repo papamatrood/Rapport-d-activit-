@@ -1,20 +1,20 @@
 {{ form_start(form) }}
-    <fieldset class="border p-2">
-        <legend>Modifier l'utilisateur</legend>
-        <table class="table table-sm table-bordered table-striped text-center">
-            <tbody>
-                <tr>
-                    <td width="12%">{{ form_row(form.firstname) }}</td>
-                    <td width="12%">{{ form_row(form.lastname) }}</td>
-                    <td width="13%">{{ form_row(form.email) }}</td>
-                    <td width="10%">{{ form_row(form.role) }}</td>
-                    <td width="8%" class="align-middle">
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-sm btn-success">{{ button_label|default('Ajouter') }}</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </fieldset>
-    {{ form_end(form) }}
+<fieldset class="border p-2">
+    <legend>Modifier l'utilisateur</legend>
+    <table class="table table-sm table-bordered table-striped text-center">
+        <tbody>
+            <tr>
+                <td width="12%">{{ form_row(form.firstname) }}</td>
+                <td width="12%">{{ form_row(form.lastname) }}</td>
+                <td width="13%">{{ form_row(form.email) }}</td>
+                <td width="10%">{{ form_row(form.role) }}</td>
+                <td width="8%" class="align-middle">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-sm btn-success">{{ button_label|default('Ajouter') }}</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>
+{{ form_end(form) }}

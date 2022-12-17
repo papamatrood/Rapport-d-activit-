@@ -25,7 +25,7 @@ class EditPasswordType extends AbstractType
                 'required' => true,
                 'first_options'  => [
                     'label' => 'Nouveau mot de passe',
-                    'hash_property_path' => 'password',
+                    // 'hash_property_path' => 'password',
                 ],
                 'second_options' => [
                     'label' => 'Confirmer le nouveau mot de passe'
@@ -37,7 +37,7 @@ class EditPasswordType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            // 'data_class' => User::class,
         ]);
     }
 }

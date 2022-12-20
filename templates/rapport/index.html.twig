@@ -3,56 +3,68 @@
 {% block title %}Les rapports d'activités{% endblock %}
 
 {% block body %}
-<div class="table-responsive p-3">
-    <fieldset class="border p-2">
-        <legend>Les rapports d'activités</legend>
-        <table class="table table-sm table-bordered table-striped text-center mb-0">
-            <thead>
-                <tr>
-                    <th width="13%">Date de création</th>
-                    <th width="10%">Installations</th>
-                    <th width="10%">Inter-Qualités</th>
-                    <th width="12%">Inter-Dépannages</th>
-                    <th width="10%">Visites</th>
-                    <th width="10%">Récuperations</th>
-                    <th width="18%">Autres</th>
-                    <th width="15%">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rapport in rapports %}
-                <tr>
-                    <td>{{ rapport.createdAt ? rapport.createdAt|date('Y-m-d') : '' }}</td>
-                    <td>{{ rapport.installation }}</td>
-                    <td>{{ rapport.interqualite }}</td>
-                    <td>{{ rapport.interdepannage }}</td>
-                    <td>{{ rapport.visite }}</td>
-                    <td>{{ rapport.recuperation }}</td>
-                    <td>{{ rapport.autre }}</td>
-                    <td>
-                        <div class="btn-group" role="group">
-                            <a class="btn btn-sm btn-primary d-inline"
-                                href="{{ path('app_rapport_edit', {'id': rapport.id}) }}">Modifier</a>
-                            <form method="post" action="{{ path('app_rapport_delete', {'id': rapport.id}) }}"
-                                onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
-                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rapport.id) }}">
-                                <button class="btn btn-sm btn-danger d-inline">Supprimer</button>
-                            </form>
-                        </div>
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-md-4">
+        {{render_chart(camembert)}}
+    </div>
+    <div class="col-md-8">
+        <div class="table-responsive p-3">
+            <fieldset class="border p-2">
+                <legend>Les rapports d'activités</legend>
+                <table class="table table-sm table-bordered table-striped text-center mb-0">
+                    <thead>
+                        <tr>
+                            <th width="13%">Date de création</th>
+                            <th width="10%">Installations</th>
+                            <th width="10%">Inter-Qualités</th>
+                            <th width="12%">Inter-Dépannages</th>
+                            <th width="10%">Visites</th>
+                            <th width="10%">Récuperations</th>
+                            <th width="18%">Autres</th>
+                            <th width="15%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rapport in rapports %}
+                        <tr>
+                            <td>{{ rapport.createdAt ? rapport.createdAt|date('Y-m-d') : '' }}</td>
+                            <td>{{ rapport.installation }}</td>
+                            <td>{{ rapport.interqualite }}</td>
+                            <td>{{ rapport.interdepannage }}</td>
+                            <td>{{ rapport.visite }}</td>
+                            <td>{{ rapport.recuperation }}</td>
+                            <td>{{ rapport.autre }}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-sm btn-primary d-inline"
+                                        href="{{ path('app_rapport_edit', {'id': rapport.id}) }}">Modifier</a>
+                                    <form method="post" action="{{ path('app_rapport_delete', {'id': rapport.id}) }}"
+                                        onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
+                                        <input type="hidden" name="_token"
+                                            value="{{ csrf_token('delete' ~ rapport.id) }}">
+                                        <button class="btn btn-sm btn-danger d-inline">Supprimer</button>
+                                    </form>
+                                </div>
 
 
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="8">Aucun enregistrement trouvé</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </fieldset>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="8">Aucun enregistrement trouvé</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </fieldset>
 
-    {{ include('rapport/_form.html.twig', {'titre': 'Ajouter un rapport d\'activité', 'button_label': 'Ajouter'}) }}
+            {{ include('rapport/_form.html.twig', {'titre': 'Ajouter un rapport d\'activité', 'button_label':
+            'Ajouter'}) }}
+        </div>
+    </div>
 </div>
+</div>
+
 
 {% endblock %}

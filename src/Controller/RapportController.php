@@ -13,7 +13,7 @@ use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-// #[Route('/rapport')]
+#[Route('/rapport')]
 #[IsGranted('ROLE_USER')]
 class RapportController extends AbstractController
 {
@@ -86,7 +86,7 @@ class RapportController extends AbstractController
     // }
 
 
-    #[Route('/rapport/{id}/edit', name: 'app_rapport_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_rapport_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Rapport $rapport, RapportRepository $rapportRepository): Response
     {
         $form = $this->createForm(RapportType::class, $rapport);
@@ -104,7 +104,7 @@ class RapportController extends AbstractController
         ]);
     }
 
-    #[Route('/rapport/{id}', name: 'app_rapport_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_rapport_delete', methods: ['POST'])]
     public function delete(Request $request, Rapport $rapport, RapportRepository $rapportRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $rapport->getId(), $request->request->get('_token'))) {

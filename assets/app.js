@@ -15,7 +15,7 @@ import './js/bootstrap.bundle.min.js';
 // import './js/bootstrap.min.js';
 
 // // Import de react
-// import './react/index';
+import './react/index';
 
 // start the Stimulus application
 import './bootstrap';

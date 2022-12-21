@@ -4,71 +4,73 @@
 
 {% block body %}
 
-<div class="table-responsive p-3">
-    <fieldset class="border p-2">
-        <legend>Liste des utilisateurs</legend>
-        <table class="table table-sm table-bordered table-striped text-center">
-            <thead>
-                <tr>
-                    <th>Prénom</th>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Rôles</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                <tr>
-                    <td>{{ user.firstname }}</td>
-                    <td>{{ user.lastname }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ attribute(roles, user.role) }}</td>
-                    <td>
-                        <div class="btn-group rounded-right" role="group">
-                            <a class="btn btn-sm btn-primary d-inline"
-                                href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
-                            <a class="btn btn-sm btn-info d-inline text-white"
-                                href="{{ path('app_user_edit_password', {'id': user.id}) }}">Modifier le mot de
-                                passe</a>
-                            <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}"
-                                onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
-                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-                                <button class="btn btn-sm btn-danger rounded-0">Supprimer</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="6">Aucun enregistrement trouvé</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </fieldset>
+<div class="container">
+    <div class="table-responsive p-3">
+        <fieldset class="border p-2">
+            <legend>Liste des utilisateurs</legend>
+            <table class="table table-sm table-bordered table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Rôles</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ attribute(roles, user.role) }}</td>
+                        <td>
+                            <div class="btn-group rounded-right" role="group">
+                                <a class="btn btn-sm btn-primary d-inline"
+                                    href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+                                <a class="btn btn-sm btn-info d-inline text-white"
+                                    href="{{ path('app_user_edit_password', {'id': user.id}) }}">Modifier le mot de
+                                    passe</a>
+                                <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}"
+                                    onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cet élément?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                    <button class="btn btn-sm btn-danger rounded-0">Supprimer</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6">Aucun enregistrement trouvé</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </fieldset>
 
-    {{ form_start(registrationForm, {'action': path('app_register'), 'attr' : {'class': 'add-rapport mt-5', } }) }}
-    <fieldset class="border p-2">
-        <legend>Ajouter un utilisateur</legend>
-        <table class="table table-sm table-bordered table-striped text-center">
-            <tbody>
-                <tr>
-                    <td width="12%">{{ form_row(registrationForm.firstname) }}</td>
-                    <td width="12%">{{ form_row(registrationForm.lastname) }}</td>
-                    <td width="13%">{{ form_row(registrationForm.email) }}</td>
-                    <td width="10%">{{ form_row(registrationForm.password.first) }}</td>
-                    <td width="15%">{{ form_row(registrationForm.password.second) }}</td>
-                    <td width="10%">{{ form_row(registrationForm.role) }}</td>
-                    <td width="8%" class="align-bottom">
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-sm btn-success">{{ button_label|default('Ajouter') }}</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </fieldset>
-    {{ form_end(registrationForm) }}
+        {{ form_start(registrationForm, {'action': path('app_register'), 'attr' : {'class': 'add-rapport mt-5', } }) }}
+        <fieldset class="border p-2">
+            <legend>Ajouter un utilisateur</legend>
+            <table class="table table-sm table-bordered table-striped text-center">
+                <tbody>
+                    <tr>
+                        <td width="12%">{{ form_row(registrationForm.firstname) }}</td>
+                        <td width="12%">{{ form_row(registrationForm.lastname) }}</td>
+                        <td width="13%">{{ form_row(registrationForm.email) }}</td>
+                        <td width="10%">{{ form_row(registrationForm.password.first) }}</td>
+                        <td width="15%">{{ form_row(registrationForm.password.second) }}</td>
+                        <td width="10%">{{ form_row(registrationForm.role) }}</td>
+                        <td width="8%" class="align-bottom">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-sm btn-success">{{ button_label|default('Ajouter') }}</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+        {{ form_end(registrationForm) }}
+    </div>
 </div>
 {% endblock %}

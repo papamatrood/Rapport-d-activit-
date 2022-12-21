@@ -4,55 +4,57 @@
 
 {% block body %}
 
-<div class="table-responsive p-3">
-    <fieldset class="border p-2">
-        <legend>Profile</legend>
-        <table class="table table-sm table-bordered table-striped text-center">
-            <thead>
-                <tr>
-                    <th width="25%">Prénom</th>
-                    <th width="25%">Nom</th>
-                    <th width="25%">Email</th>
-                    <th width="25%">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ user.firstname }}</td>
-                    <td>{{ user.lastname }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        <div class="btn-group rounded-right" role="group">
-                            <a class="btn btn-sm btn-primary d-inline"
-                                href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
-                            <a class="btn btn-sm btn-info d-inline text-white"
-                                href="{{ path('app_user_edit_password', {'id': user.id}) }}">Modifier le mot de
-                                passe</a>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </fieldset>
+<div class="container">
+    <div class="table-responsive p-3">
+        <fieldset class="border p-2">
+            <legend>Profile</legend>
+            <table class="table table-sm table-bordered table-striped text-center">
+                <thead>
+                    <tr>
+                        <th width="25%">Prénom</th>
+                        <th width="25%">Nom</th>
+                        <th width="25%">Email</th>
+                        <th width="25%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <div class="btn-group rounded-right" role="group">
+                                <a class="btn btn-sm btn-primary d-inline"
+                                    href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+                                <a class="btn btn-sm btn-info d-inline text-white"
+                                    href="{{ path('app_user_edit_password', {'id': user.id}) }}">Modifier le mot de
+                                    passe</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
 
-    {{ form_start(form, {'attr' : {'class': 'add-rapport mt-5', } }) }}
-    <fieldset class="border p-2">
-        <legend>Modifier le profile</legend>
-        <table class="table table-sm table-bordered table-striped text-center">
-            <tbody>
-                <tr>
-                    <td width="25%">{{ form_row(form.firstname) }}</td>
-                    <td width="25%">{{ form_row(form.lastname) }}</td>
-                    <td width="25%">{{ form_row(form.email) }}</td>
-                    <td width="25%" class="align-bottom">
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-sm btn-primary">{{ button_label|default('Modifier') }}</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </fieldset>
-    {{ form_end(form) }}
+        {{ form_start(form, {'attr' : {'class': 'add-rapport mt-5', } }) }}
+        <fieldset class="border p-2">
+            <legend>Modifier le profile</legend>
+            <table class="table table-sm table-bordered table-striped text-center">
+                <tbody>
+                    <tr>
+                        <td width="25%">{{ form_row(form.firstname) }}</td>
+                        <td width="25%">{{ form_row(form.lastname) }}</td>
+                        <td width="25%">{{ form_row(form.email) }}</td>
+                        <td width="25%" class="align-bottom">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-sm btn-primary">{{ button_label|default('Modifier') }}</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+        {{ form_end(form) }}
+    </div>
 </div>
 {% endblock %}
